@@ -30,10 +30,10 @@ public class IDMInitializer {
     @PostConstruct
     public void init() {
         IdentityManager im = this.partitionManager.createIdentityManager();
-        //initializeRole("jpicklyk", ApplicationRole.ADMINISTRATOR);
+        initializeRole("jpicklyk", ApplicationRole.ADMINISTRATOR);
 
     }
-/*
+
     private void initializeRole(String user, ApplicationRole roleName) {
         try {
             IdentityManager im = this.partitionManager.createIdentityManager();
@@ -55,5 +55,5 @@ public class IDMInitializer {
             ex.printStackTrace();
         }
     }
-    */
+    
 }

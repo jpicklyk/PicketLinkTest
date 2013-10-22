@@ -123,11 +123,11 @@ public class HybridModel {
      *
      * @throws IdentityManagementException If the method fails.
      */
-    public static User getLdapUser(IdentityManager identityManager, String loginName) throws IdentityManagementException {
+    public static LdapUser getLdapUser(IdentityManager identityManager, String loginName) throws IdentityManagementException {
         if(isNullOrEmpty(loginName))
             return null;
-        List<User> users = identityManager.createIdentityQuery(User.class)
-                .setParameter(User.LOGIN_NAME, loginName)
+        List<LdapUser> users = identityManager.createIdentityQuery(LdapUser.class)
+                .setParameter(LdapUser.LOGIN_NAME, loginName)
                 .getResultList();
         if(users.isEmpty()) {
             return null;

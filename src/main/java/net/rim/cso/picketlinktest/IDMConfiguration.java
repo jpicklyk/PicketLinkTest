@@ -22,9 +22,9 @@ import net.rim.cso.picketlinktest.model.RoleTypeEntity;
 
 import org.picketlink.idm.config.IdentityConfiguration;
 import org.picketlink.idm.config.IdentityConfigurationBuilder;
-import org.picketlink.idm.model.IdentityType;
 import org.picketlink.idm.model.Relationship;
 import org.picketlink.idm.model.basic.Group;
+import org.picketlink.idm.model.basic.Role;
 import org.picketlink.internal.EEJPAContextInitializer;
 
 /**
@@ -69,6 +69,7 @@ public class IDMConfiguration {
                         )
                         .addContextInitializer(contextInitializer)
                         .supportGlobalRelationship(Relationship.class)
+                        .supportType(Role.class)
                         .supportAttributes(true)
                     .ldap()
                         .baseDN(ldapProperties.getProperty("baseDN"))
@@ -77,7 +78,7 @@ public class IDMConfiguration {
                         .url(ldapProperties.getProperty("url"))
                         .activeDirectory(true)
                         .supportCredentials(true)
-                        .supportType(IdentityType.class)
+                        .supportType(LdapUser.class, Group.class)
                         .addCredentialHandler(LdapUserCredentialHandler.class)
                         
                         .mapping(LdapUser.class)
