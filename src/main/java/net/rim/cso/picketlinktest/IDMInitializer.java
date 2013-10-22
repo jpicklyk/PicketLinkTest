@@ -29,9 +29,7 @@ public class IDMInitializer {
     private PartitionManager partitionManager;
 
     @PostConstruct
-    public void init() {
-        partitionManager.add(new Realm("default"));
-        
+    public void init() {        
         initializeRole("jpicklyk", ApplicationRole.ADMINISTRATOR);
 
     }

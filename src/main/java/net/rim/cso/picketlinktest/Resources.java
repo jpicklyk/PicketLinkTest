@@ -7,6 +7,7 @@
 package net.rim.cso.picketlinktest;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,11 +21,17 @@ import org.picketlink.annotations.PicketLink;
 public class Resources {
     
     @PersistenceContext(unitName = "idmPU")
-    private EntityManager picketLinkEntityManager;
+    private EntityManager em;
     
     @Produces
-    @PicketLink
+    @PicketLink    
     public EntityManager producePLEntityManager() {
-        return picketLinkEntityManager;
+        return em;
+    }
+    
+    public void closeEntityManager(@Disposes EntityManager em) {
+        if(em.isOpen()) {
+            em.close();
+        }
     }
 }
