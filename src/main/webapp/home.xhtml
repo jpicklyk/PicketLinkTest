@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+    <ui:fragment rendered="#{not identity.loggedIn}">
+        <meta http-equiv="Refresh" content="0; URL=#{facesContext.externalContext.requestContextPath}/login.jsf"/>
+    </ui:fragment>
+</head>
+<body>
+    <ui:fragment rendered="#{identity.loggedIn}">
+        <p>
+            Welcome <b>#{identity.account.loginName}</b> !
+        </p>
+
+        <p>
+            Each account is mapped to one or multiple roles. Depending on the role, some menu items are enabled/disabled:
+
+            <h:form>
+                <ul>
+                    <ui:fragment rendered="#{authorizationManager.isRisksManagementAllowed()}">
+                        <li><h:outputLink value="#">Risks Management</h:outputLink></li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{authorizationManager.isTimesheetAllowed()}">
+                        <li><h:outputLink value="#">Timesheet</h:outputLink></li>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{authorizationManager.isSystemAdministrationAllowed()}">
+                        <li><h:outputLink value="#">System Administration</h:outputLink></li>
+                    </ui:fragment>
+                </ul>
+
+                <p>
+                    <h:commandButton id="logout" value="Log out" action="#{loginController.logout}"/>
+                </p>
+            </h:form>
+        </p>
+    </ui:fragment>
+</body>
+</html>
+
