@@ -29,9 +29,4 @@ public class Resources {
         return em;
     }
     
-    public void closeEntityManager(@Disposes EntityManager em) {
-        if(em.isOpen()) {
-            em.close();
-        }
-    }
 }
