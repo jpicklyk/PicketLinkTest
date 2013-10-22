@@ -19,12 +19,7 @@
 
             <h:form>
                 <ul>
-                    <ui:fragment rendered="#{authorizationManager.isRisksManagementAllowed()}">
-                        <li><h:outputLink value="#">Risks Management</h:outputLink></li>
-                    </ui:fragment>
-                    <ui:fragment rendered="#{authorizationManager.isTimesheetAllowed()}">
-                        <li><h:outputLink value="#">Timesheet</h:outputLink></li>
-                    </ui:fragment>
+                    
                     <ui:fragment rendered="#{authorizationManager.isSystemAdministrationAllowed()}">
                         <li><h:outputLink value="#">System Administration</h:outputLink></li>
                     </ui:fragment>

@@ -6,7 +6,7 @@
 
 package net.rim.cso.picketlinktest;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +16,7 @@ import org.picketlink.annotations.PicketLink;
  *
  * @author jpicklyk
  */
-@Stateful
+@Stateless
 public class Resources {
     
     @PersistenceContext(unitName = "idmPU")

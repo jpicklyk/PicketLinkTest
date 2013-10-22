@@ -14,6 +14,7 @@ import org.picketlink.idm.IdentityManagementException;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.RelationshipManager;
+import org.picketlink.idm.model.basic.Realm;
 import org.picketlink.idm.model.basic.Role;
 
 /**
@@ -29,7 +30,8 @@ public class IDMInitializer {
 
     @PostConstruct
     public void init() {
-        IdentityManager im = this.partitionManager.createIdentityManager();
+        partitionManager.add(new Realm("default"));
+        
         initializeRole("jpicklyk", ApplicationRole.ADMINISTRATOR);
 
     }

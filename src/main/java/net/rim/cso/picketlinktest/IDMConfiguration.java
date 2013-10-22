@@ -16,12 +16,16 @@ import javax.inject.Inject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import net.rim.cso.picketlinktest.model.AttributeReferenceTypeEntity;
+import net.rim.cso.picketlinktest.model.AttributeTypeEntity;
+import net.rim.cso.picketlinktest.model.IdentityTypeEntity;
+import net.rim.cso.picketlinktest.model.PartitionTypeEntity;
 import net.rim.cso.picketlinktest.model.RelationshipIdentityTypeReferenceEntity;
 import net.rim.cso.picketlinktest.model.RelationshipTypeEntity;
 import net.rim.cso.picketlinktest.model.RoleTypeEntity;
 
 import org.picketlink.idm.config.IdentityConfiguration;
 import org.picketlink.idm.config.IdentityConfigurationBuilder;
+import org.picketlink.idm.model.Partition;
 import org.picketlink.idm.model.Relationship;
 import org.picketlink.idm.model.basic.Group;
 import org.picketlink.idm.model.basic.Role;
@@ -65,11 +69,14 @@ public class IDMConfiguration {
                                 RelationshipTypeEntity.class,
                                 RelationshipIdentityTypeReferenceEntity.class,
                                 RoleTypeEntity.class,
-                                AttributeReferenceTypeEntity.class
+                                AttributeReferenceTypeEntity.class,
+                                PartitionTypeEntity.class,
+                                AttributeTypeEntity.class,
+                                IdentityTypeEntity.class
                         )
                         .addContextInitializer(contextInitializer)
                         .supportGlobalRelationship(Relationship.class)
-                        .supportType(Role.class)
+                        .supportType(Role.class, Partition.class)
                         .supportAttributes(true)
                     .ldap()
                         .baseDN(ldapProperties.getProperty("baseDN"))
