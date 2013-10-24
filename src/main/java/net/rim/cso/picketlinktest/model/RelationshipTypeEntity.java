@@ -7,28 +7,32 @@
 package net.rim.cso.picketlinktest.model;
 
 import javax.persistence.Entity;
+
 import org.picketlink.idm.jpa.annotations.RelationshipClass;
 import org.picketlink.idm.jpa.annotations.entity.IdentityManaged;
 import org.picketlink.idm.model.Relationship;
 
 /**
- *
+ * 
  * @author jpicklyk
  */
-@IdentityManaged(value = {Relationship.class})
+@IdentityManaged(value = { Relationship.class })
 @Entity
-public class RelationshipTypeEntity extends AttributedTypeEntity{
-    
-    @RelationshipClass
-    private String typeName;
+public class RelationshipTypeEntity extends AttributedTypeEntity {
 
-    public String getTypeName() {
-        return typeName;
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4596423537896079456L;
+	@RelationshipClass
+	private String typeName;
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
-    
-    
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
 }

@@ -6,51 +6,55 @@
 
 package net.rim.cso.picketlinktest;
 
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.picketlink.Identity;
-import org.picketlink.idm.IdentityManager;
 
 /**
- *
+ * 
  * @author jpicklyk
  */
 @Named
-@RequestScoped
+@Stateless
 public class LoginController {
-    @Inject
-    private Identity identity;
-    
-    @Inject
-    private IdentityManager identityManager;
-    
-    public void test() {
-        System.out.println();
-    }
-    
-    public String login() {
-        // let's authenticate the user. the credentials were provided by populating the <code>loginCredentials</code>
-        // named bean directly.
-        this.identity.login();
+	@Inject
+	private Identity identity;
 
-        String result = null;
-        //User user = BasicModel.getUser(identityManager, "jpicklyk");
-        
-        if (this.identity.isLoggedIn()) {
-            result = "/home.xhtml";
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-                    "Authentication was unsuccessful.  Please check your username and password " + "before trying again."));
-        }
+	// @Inject
+	// private IdentityManager identityManager;
 
-        return result;
-    }
-    
-    public String logout() {
-        this.identity.logout();
-        return "/login.xhtml";
-    }
+	public void test() {
+		System.out.println();
+	}
+
+	public String login() {
+		// let's authenticate the user. the credentials were provided by
+		// populating the <code>loginCredentials</code>
+		// named bean directly.
+		this.identity.login();
+
+		String result = null;
+		// User user = BasicModel.getUser(identityManager, "jpicklyk");
+
+		if (this.identity.isLoggedIn()) {
+			result = "/home.xhtml";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(
+							"Authentication was unsuccessful.  Please check your username and password "
+									+ "before trying again."));
+		}
+
+		return result;
+	}
+
+	public String logout() {
+		this.identity.logout();
+		return "/login.xhtml";
+	}
 }

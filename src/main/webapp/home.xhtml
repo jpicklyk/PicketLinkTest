@@ -23,6 +23,9 @@
                     <ui:fragment rendered="#{authorizationManager.isSystemAdministrationAllowed()}">
                         <li><h:outputLink value="#">System Administration</h:outputLink></li>
                     </ui:fragment>
+                    <ui:fragment rendered="#{authorizationManager.isDeveloper()}">
+                        <li><h:outputLink value="#">Developer</h:outputLink></li>
+                    </ui:fragment>
                 </ul>
 
                 <p>

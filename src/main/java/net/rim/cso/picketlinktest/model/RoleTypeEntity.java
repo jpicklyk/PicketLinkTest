@@ -7,29 +7,34 @@
 package net.rim.cso.picketlinktest.model;
 
 import javax.persistence.Entity;
+
 import org.picketlink.idm.jpa.annotations.AttributeValue;
 import org.picketlink.idm.jpa.annotations.entity.IdentityManaged;
 import org.picketlink.idm.model.basic.Role;
 
 /**
- *
+ * 
  * @author jpicklyk
  */
-@IdentityManaged(value = {Role.class})
+@IdentityManaged(value = { Role.class })
 @Entity
 public class RoleTypeEntity extends IdentityTypeEntity {
-    @AttributeValue
-    private String name;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4006248368163927779L;
+	@AttributeValue
+	private String name;
 
-    public RoleTypeEntity() {
-    }
+	public RoleTypeEntity() {
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

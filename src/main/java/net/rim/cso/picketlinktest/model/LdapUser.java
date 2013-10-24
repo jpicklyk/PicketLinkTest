@@ -10,32 +10,35 @@ import org.picketlink.idm.model.annotation.AttributeProperty;
 import org.picketlink.idm.model.basic.User;
 
 /**
- *
+ * 
  * @author jpicklyk
  */
-public class LdapUser extends User{
-    
-    private String fullName;
-   
-    
-    public LdapUser() {
-        this(null);
-    }
-    
-    public LdapUser(final String loginName) {
-        super(loginName);
-    }
+public class LdapUser extends User {
 
-    @AttributeProperty
-    public String getFullName() {
-        if (this.fullName == null) {
-            this.fullName = getFirstName() + " " + getLastName();
-        }
-        return fullName;
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3421992022166624061L;
+	private String fullName;
 
-    public void setFullName(final String fullName) {
-        this.fullName = fullName;
-    }
+	public LdapUser() {
+		this(null);
+	}
+
+	public LdapUser(final String loginName) {
+		super(loginName);
+	}
+
+	@AttributeProperty
+	public String getFullName() {
+		if (this.fullName == null) {
+			this.fullName = getFirstName() + " " + getLastName();
+		}
+		return fullName;
+	}
+
+	public void setFullName(final String fullName) {
+		this.fullName = fullName;
+	}
 
 }

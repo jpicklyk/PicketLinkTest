@@ -6,8 +6,10 @@
 
 package net.rim.cso.picketlinktest;
 
-import net.rim.cso.picketlinktest.model.LdapUser;
 import java.util.List;
+
+import net.rim.cso.picketlinktest.model.LdapUser;
+
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.ldap.internal.LDAPPlainTextPasswordCredentialHandler;
 import org.picketlink.idm.model.Account;
@@ -15,24 +17,27 @@ import org.picketlink.idm.query.IdentityQuery;
 import org.picketlink.idm.spi.IdentityContext;
 
 /**
- *
+ * 
  * @author jpicklyk
  */
-public class LdapUserCredentialHandler extends LDAPPlainTextPasswordCredentialHandler {
-    
-    @Override
-    protected Account getAccount(IdentityContext context, String loginName) {
-        IdentityManager identityManager = getIdentityManager(context);
-        IdentityQuery<LdapUser> query = identityManager.createIdentityQuery(LdapUser.class);
+@SuppressWarnings("rawtypes")
+public class LdapUserCredentialHandler extends
+		LDAPPlainTextPasswordCredentialHandler {
 
-        query.setParameter(LdapUser.LOGIN_NAME, loginName);
+	@Override
+	protected Account getAccount(IdentityContext context, String loginName) {
+		IdentityManager identityManager = getIdentityManager(context);
+		IdentityQuery<LdapUser> query = identityManager
+				.createIdentityQuery(LdapUser.class);
 
-        List<LdapUser> result = query.getResultList();
+		query.setParameter(LdapUser.LOGIN_NAME, loginName);
 
-        if (result.isEmpty()) {
-            return null;
-        }
+		List<LdapUser> result = query.getResultList();
 
-        return result.get(0);
-    }
+		if (result.isEmpty()) {
+			return null;
+		}
+
+		return result.get(0);
+	}
 }

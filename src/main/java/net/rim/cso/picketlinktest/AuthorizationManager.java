@@ -6,11 +6,13 @@
 
 package net.rim.cso.picketlinktest;
 
+import static net.rim.cso.picketlinktest.HybridModel.getRole;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
-import static net.rim.cso.picketlinktest.HybridModel.getRole;
+
 import org.picketlink.Identity;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
@@ -18,59 +20,67 @@ import org.picketlink.idm.model.Account;
 import org.picketlink.idm.model.basic.Role;
 
 /**
- *
+ * 
  * @author jpicklyk
  */
 @ApplicationScoped
 @Named
 public class AuthorizationManager {
-    @Inject
-    private Instance<Identity> identityInstance;
+	@Inject
+	private Instance<Identity> identityInstance;
 
-    @Inject
-    private IdentityManager identityManager;
+	@Inject
+	private IdentityManager identityManager;
 
-    @Inject
-    private RelationshipManager relationshipManager;
+	@Inject
+	private RelationshipManager relationshipManager;
 
-    public boolean isRisksManagementAllowed() {
-        return isAdministrator() || (isProjectManager());
-    }
+	public boolean isRisksManagementAllowed() {
+		return isAdministrator() || (isProjectManager());
+	}
 
-    public boolean isTimesheetAllowed() {
-        return isAdministrator() || (isProjectManager() || isDeveloper());
-    }
+	public boolean isTimesheetAllowed() {
+		return isAdministrator() || (isProjectManager() || isDeveloper());
+	}
 
-    public boolean isSystemAdministrationAllowed() {
-        return isAdministrator();
-    }
+	public boolean isSystemAdministrationAllowed() {
+		return isAdministrator();
+	}
 
-    public boolean isProjectManager() {
-        return hasRole(ApplicationRole.PROJECT_MANAGER);
-    }
+	public boolean isProjectManager() {
+		return hasRole(ApplicationRole.PROJECT_MANAGER);
+	}
 
-    public boolean isAdministrator() {
-        return hasRole(ApplicationRole.ADMINISTRATOR);
-    }
+	public boolean isAdministrator() {
+		return hasRole(ApplicationRole.ADMINISTRATOR);
+	}
 
-    public boolean isDeveloper() {
-        return hasRole(ApplicationRole.DEVELOPER);
-    }
+	public boolean isDeveloper() {
+		return hasRole(ApplicationRole.DEVELOPER);
+	}
 
-    private Identity getIdentity() {
-        return this.identityInstance.get();
-    }
+	private Identity getIdentity() {
+		return this.identityInstance.get();
+	}
 
-    /**
-     * <p>Checks if the current user is granted with the given role.</p>
-     *
-     * @param applicationRole
-     * @return
-     */
-    private boolean hasRole(ApplicationRole applicationRole) {
-        Account agent = getIdentity().getAccount();
-        Role role = getRole(this.identityManager, applicationRole.name());
+	/**
+	 * <p>
+	 * Checks if the current user is granted with the given role.
+	 * </p>
+	 * 
+	 * @param applicationRole
+	 * @return
+	 */
+	private boolean hasRole(ApplicationRole applicationRole) {
+		Account agent = getIdentity().getAccount();
+		Role role = getRole(this.identityManager, applicationRole.name());
+		boolean hasRole = HybridModel.hasRole(this.relationshipManager, agent,
+				role);
+		// TODO - Check groups for role
+		if (!hasRole) {
 
-        return HybridModel.hasRole(this.relationshipManager, agent, role);
-    }
+		}
+
+		return hasRole;
+	}
 }

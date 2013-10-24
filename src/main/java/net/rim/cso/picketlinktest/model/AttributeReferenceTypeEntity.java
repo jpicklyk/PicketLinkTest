@@ -7,97 +7,105 @@
 package net.rim.cso.picketlinktest.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
 import org.picketlink.idm.jpa.annotations.AttributeClass;
 import org.picketlink.idm.jpa.annotations.AttributeName;
 import org.picketlink.idm.jpa.annotations.AttributeValue;
 import org.picketlink.idm.jpa.annotations.OwnerReference;
 
 /**
- *
+ * 
  * @author jpicklyk
  */
 @Entity
 public class AttributeReferenceTypeEntity implements Serializable {
-    @Id
-    @GeneratedValue
-    private Long id;
-    
-    @OwnerReference    
-    private String owner;
-    
-    @AttributeClass
-    private String typeName;
-            
-    @AttributeName
-    private String name;
-    
-    @AttributeValue
-    @Column(length = 1024)
-    private String attributeValue;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2357231685496693389L;
 
-    public Long getId() {
-        return id;
-    }
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@OwnerReference
+	private String owner;
 
-    public String getOwner() {
-        return owner;
-    }
+	@AttributeClass
+	private String typeName;
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
+	@AttributeName
+	private String name;
 
-    public String getTypeName() {
-        return typeName;
-    }
+	@AttributeValue
+	@Column(length = 1024)
+	private String attributeValue;
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getOwner() {
+		return owner;
+	}
 
-    public String getAttributeValue() {
-        return attributeValue;
-    }
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
 
-    public void setAttributeValue(String attributeValue) {
-        this.attributeValue = attributeValue;
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
+	public String getTypeName() {
+		return typeName;
+	}
 
-        if (!getClass().isInstance(obj)) {
-            return false;
-        }
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
 
-        AttributedTypeEntity other = (AttributedTypeEntity) obj;
+	public String getName() {
+		return name;
+	}
 
-        return getId() != null && other.getId() != null && getId().equals(other.getId());
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @Override
-    public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getId() != null ? getId().hashCode() : 0);
-        return result;
-    }
+	public String getAttributeValue() {
+		return attributeValue;
+	}
+
+	public void setAttributeValue(String attributeValue) {
+		this.attributeValue = attributeValue;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		if (!getClass().isInstance(obj)) {
+			return false;
+		}
+
+		AttributedTypeEntity other = (AttributedTypeEntity) obj;
+
+		return getId() != null && other.getId() != null
+				&& getId().equals(other.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getId() != null ? getId().hashCode() : 0;
+		result = 31 * result + (getId() != null ? getId().hashCode() : 0);
+		return result;
+	}
 }

@@ -7,26 +7,27 @@
 package net.rim.cso.picketlinktest;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+
 import org.picketlink.annotations.PicketLink;
 
 /**
- *
+ * 
  * @author jpicklyk
  */
 @Stateless
 public class Resources {
-    
-    @PersistenceContext(unitName = "idmPU")
-    private EntityManager em;
-    
-    @Produces
-    @PicketLink    
-    public EntityManager producePLEntityManager() {
-        return em;
-    }
-    
+
+	@PersistenceContext(unitName = "idmPU", type = PersistenceContextType.TRANSACTION)
+	private EntityManager em;
+
+	@Produces
+	@PicketLink
+	public EntityManager producePLEntityManager() {
+		return em;
+	}
+
 }
